@@ -47,7 +47,6 @@ builders:
   - -v
   - <%= Dir.pwd %>/tmp/packer-builder-tmp:/tmp
   - --privileged=true
-  - --storage-opt=size=11G
   - "{{ .Image }}"
   - /sbin/init
   commit: true
@@ -170,10 +169,10 @@ provisioners:
   environment_vars:
   - IMAGE_METADATA_TARBALL=/var/tmp/image-metadata-{{ user `image_name` }}.tar.bz2
   execute_command: "{{ .Vars }} exec sudo -E -S bash '{{ .Path }}'"
-- type: file
-  source: /var/tmp/image-metadata-{{ user `image_name` }}.tar.bz2
-  destination: tmp/image-metadata-{{ user `image_name` }}.tar.bz2
-  direction: download
+# - type: file
+  # source: /var/tmp/image-metadata-{{ user `image_name` }}.tar.bz2
+  # destination: tmp/image-metadata-{{ user `image_name` }}.tar.bz2
+  # direction: download
 post-processors:
 -
   - type: docker-tag
